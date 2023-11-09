@@ -6,37 +6,37 @@
           <th
             class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
           >
-            Name
+            year
           </th>
           <th
             class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
           >
-            Title
+            sales
           </th>
           <th
             class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
           >
-            Status
+            operatingprofit
           </th>
           <th
             class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
           >
-            Role
+            netincome
           </th>
           <th
             class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
           >
-            Email
+            operatingprofitratio
           </th>
           <th
             class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
           >
-            Phone
+            netprofitratio
           </th>
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200 overflow-y-auto max-h-64">
-        <TR v-for="financial in financials" />
+        <TR :financial="financial" v-for="financial in financials" />
         <!-- 나머지 행들 -->
       </tbody>
     </table>

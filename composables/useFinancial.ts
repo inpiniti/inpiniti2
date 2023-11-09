@@ -1,7 +1,7 @@
-import ISector from "@/interface/ISector";
+import IFinancial from "@/interface/IFinancial";
 
 export const useFinancial = () => {
-  const financials = useState<ISector[]>("financials", () => []);
+  const financials = useState<IFinancial[]>("financials", () => []);
   const yyyy_mm = useState<string>("yyyy_mm", () => "2023.01");
   const getFinancials = async () => {
     return useApi().get({
