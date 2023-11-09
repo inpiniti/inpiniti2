@@ -3,7 +3,7 @@
     <Header />
     <Nav />
     <Row>
-      <Column>
+      <Column class="flex-grow">
         <Section />
         <Articel><slot /></Articel>
       </Column>

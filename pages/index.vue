@@ -36,16 +36,12 @@
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200 overflow-y-auto max-h-64">
-        <TR v-for="tr in trs" />
+        <TR v-for="financial in financials" />
         <!-- 나머지 행들 -->
       </tbody>
     </table>
   </div>
 </template>
 <script setup lang="ts">
-const trs = ref<any>([
-  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5,
-  6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1,
-  2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-]);
+const { financials } = useFinancial();
 </script>
