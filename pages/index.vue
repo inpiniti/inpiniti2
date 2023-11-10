@@ -1,47 +1,95 @@
 <template>
-  <div class="index">
-    <table class="min-w-full divide-y divide-gray-200">
-      <thead class="sticky top-0 bg-gray-100">
-        <tr>
+  <div class="index h-full overflow-auto relative">
+    <div
+      class="absolute top-0, bottom-0, left-0, right-0 flex items-center justify-center h-full w-full text-stone-400"
+      :class="{ 'backdrop-blur': financialsLoading }"
+      v-if="financialsLoading"
+    >
+      <div class="loading">loading...</div>
+    </div>
+    <table class="min-w-full">
+      <thead class="sticky top-0">
+        <tr class="hover:bg-neutral-600 hover:text-neutral-200 bg-neutral-900">
           <th
-            class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            class="px-3 py-1 whitespace-nowrap"
+            v-for="field in financial_filed"
           >
-            year
-          </th>
-          <th
-            class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            sales
-          </th>
-          <th
-            class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            operatingprofit
-          </th>
-          <th
-            class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            netincome
-          </th>
-          <th
-            class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            operatingprofitratio
-          </th>
-          <th
-            class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            netprofitratio
+            {{ field }}
           </th>
         </tr>
       </thead>
-      <tbody class="bg-white divide-y divide-gray-200 overflow-y-auto max-h-64">
-        <TR :financial="financial" v-for="financial in financials" />
+      <tbody>
+        <TR
+          :financial="financial"
+          v-for="(financial, index) in filterFinancials"
+          class="hover:bg-neutral-600 hover:text-neutral-200"
+          :class="{ 'bg-neutral-900': index % 2 !== 0 }"
+        />
         <!-- 나머지 행들 -->
       </tbody>
     </table>
   </div>
 </template>
 <script setup lang="ts">
-const { financials } = useFinancial();
+const financial_filed = ref<string[]>([
+  "연도",
+  "매출",
+  "영업이익",
+  "순이익",
+  "영업이익률",
+  "순이익률",
+  "이전 매출",
+  "이전 영업이익",
+  "이전 순이익",
+  "이전 영업이익률",
+  "이전 순이익률",
+  "매출 변동",
+  "영업이익 변동",
+  "순이익 변동",
+  "영업이익률 변동",
+  "순이익률 변동",
+  "거래일",
+  "종목 약어",
+  "종목 코드",
+  "시장 이름",
+  "월말 종가",
+  "최고 종가",
+  "최저 종가",
+  "표준 편차",
+  "첨도",
+  "왜도",
+  "베타",
+  "아미후드 계수",
+  "제로 수",
+  "월 누적 거래량",
+  "평균 누적 거래량",
+  "월 누적 거래액",
+  "평균 누적 거래액",
+  "월말 종가 변동",
+  "코드",
+  "심볼 코드",
+  "이름",
+  "섹터 코드",
+  "섹터 이름",
+  "다음 월말 종가",
+]);
+const { filterFinancials, financialsLoading } = useFinancial();
 </script>
+<style scoped lang="scss">
+.index {
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+}
+.index::-webkit-scrollbar {
+  display: initial;
+  width: 1px;
+  height: 1px;
+}
+.index::-webkit-scrollbar-thumb {
+  background-color: rgb(14 165 233);
+}
+.index::-webkit-scrollbar-track {
+  background-color: black;
+}
+</style>

@@ -1,14 +1,11 @@
 <template>
-  <Column class="h-screen">
-    <Header />
-    <Nav />
-    <Row>
-      <Column class="flex-grow">
-        <Section />
-        <Articel><slot /></Articel>
-      </Column>
-      <Aside />
-    </Row>
-    <Footer />
-  </Column>
+  <Row class="h-screen text-sm bg-neutral-800 text-neutral-400">
+    <Sector />
+    <Stock />
+    <Column class="flex-grow">
+      <MarketType />
+      <Search />
+      <Articel><slot /></Articel>
+    </Column>
+  </Row>
 </template>

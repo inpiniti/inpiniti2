@@ -1,7 +1,8 @@
 import ISector from "@/interface/ISector";
+import { useStorage } from "@vueuse/core";
 
 export const useSector = () => {
-  const sectors = useState<ISector[]>("sectors", () => []);
+  const sectors = useStorage<ISector[]>("sectors", []);
   const selectSector = useState<ISector>("select_sector", () => <ISector>{});
   const getSectors = async () => {
     return useApi().get({
