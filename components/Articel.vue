@@ -1,9 +1,3 @@
 <template>
-  <div class="articel"><slot /></div>
+  <div class="flex-grow overflow-hidden"><slot /></div>
 </template>
-<style scoped lang="scss">
-.articel {
-  flex-grow: 1;
-  overflow: hidden;
-}
-</style>

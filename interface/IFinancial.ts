@@ -1,4 +1,4 @@
-export default interface IFinancial {
+export interface IFinancial {
   year: string; // 연도
   sales: string; // 매출
   operatingprofit: string; // 영업이익

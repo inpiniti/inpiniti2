@@ -1,5 +1,7 @@
 <template>
-  <Row class="h-screen text-sm bg-neutral-800 text-neutral-400">
+  <div
+    class="flex lg:flex-row flex-col flex-grow overflow-hidden h-screen text-sm bg-neutral-800 text-neutral-400"
+  >
     <Sector />
     <Stock />
     <Column class="flex-grow">
@@ -7,5 +9,5 @@
       <Search />
       <Articel><slot /></Articel>
     </Column>
-  </Row>
+  </div>
 </template>

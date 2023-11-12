@@ -30,6 +30,11 @@
         {{ year }}
       </option>
     </select>
+    <input
+      type="text"
+      class="h-7 outline-none hover:bg-neutral-600 hover:text-neutral-200 bg-neutral-700 text-neutral-300 px-3 py-1"
+      v-model="search_word"
+    />
     <button
       class="h-7 hover:bg-neutral-600 hover:text-neutral-200 bg-neutral-700 text-neutral-300 outline-none px-3 py-1"
       @click="submit"
@@ -48,9 +53,10 @@ const { financials, filterFinancials, getFinancials, financialsFilter } =
 const year = ref<string>("2023");
 const month = ref<string>("1");
 const yyyy_mm = useState<string>("yyyy_mm", () => "2023.01");
+const search_word = useState<string>("search_word", () => "");
 
 const submit = () => {
-  yyyy_mm.value = `${year.value}.${month.value.padStart(2, "0")}`;
+  useSearch().yyyy_mm.value = `${year.value}.${month.value.padStart(2, "0")}`;
   getFinancials()
     .then((res: any) => {
       financials.value = res;

@@ -1,4 +1,4 @@
-export default interface ISector {
+export interface ISector {
   sectorCode: string; // 업종코드
   sectorName: string; // 업종명
 }

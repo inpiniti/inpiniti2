@@ -1,5 +1,7 @@
 <template>
-  <div class="index h-full overflow-auto relative">
+  <div
+    class="h-full overflow-auto relative scrollbar-hide scrollbar scrollbar-w scrollbar-h"
+  >
     <div
       class="absolute top-0, bottom-0, left-0, right-0 flex items-center justify-center h-full w-full text-stone-400"
       :class="{ 'backdrop-blur': financialsLoading }"
@@ -75,21 +77,3 @@ const financial_filed = ref<string[]>([
 ]);
 const { filterFinancials, financialsLoading } = useFinancial();
 </script>
-<style scoped lang="scss">
-.index {
-  scrollbar-width: none;
-  -ms-overflow-style: none; /* 인터넷 익스플로러 */
-  scrollbar-width: none; /* 파이어폭스 */
-}
-.index::-webkit-scrollbar {
-  display: initial;
-  width: 1px;
-  height: 1px;
-}
-.index::-webkit-scrollbar-thumb {
-  background-color: rgb(14 165 233);
-}
-.index::-webkit-scrollbar-track {
-  background-color: black;
-}
-</style>

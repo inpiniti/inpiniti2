@@ -20,5 +20,24 @@ export const useApi = () => {
         }
       });
     },
+    post: async ({ url, body }: { url: string; body?: any; fail?: any }) => {
+      const response = await fetch(`${api}${url}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          accept: "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+
+      return new Promise<void>(async (resolve, reject) => {
+        if (response.status != 200) {
+          reject();
+        } else {
+          const resData = await response.json();
+          resolve(resData);
+        }
+      });
+    },
   };
 };

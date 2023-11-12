@@ -10,7 +10,7 @@
   </tr>
 </template>
 <script setup lang="ts">
-import IFinancial from "@/interface/IFinancial";
+import type { IFinancial } from "@/interface/IFinancial";
 const props = defineProps<{
   financial: IFinancial;
 }>();

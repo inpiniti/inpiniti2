@@ -11,5 +11,30 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        ".scrollbar-hide": {
+          "scrollbar-width": "none" /* 파이어폭스 */,
+          "-ms-overflow-style": "none" /* 인터넷 익스플로러 */,
+        },
+        ".scrollbar::-webkit-scrollbar-thumb": {
+          backgroundColor: "rgb(14, 165, 233)",
+        },
+        ".scrollbar::-webkit-scrollbar-track": {
+          backgroundColor: "black",
+        },
+        ".scrollbar::-webkit-scrollbar": {
+          display: "initial",
+        },
+        ".scrollbar-w::-webkit-scrollbar": {
+          width: "1px",
+        },
+        ".scrollbar-h::-webkit-scrollbar": {
+          height: "1px",
+        },
+      };
+      addUtilities(newUtilities);
+    },
+  ],
 };

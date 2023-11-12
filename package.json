@@ -1,5 +1,6 @@
 {
   "name": "inpiniti2",
+  "type": "module",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -9,7 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxt/devtools": "latest",
+    "@nuxt/devtools": "^1.0.1",
     "autoprefixer": "^10.4.15",
     "nuxt": "^3.7.0",
     "postcss": "^8.4.29",
