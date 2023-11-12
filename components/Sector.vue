@@ -10,10 +10,9 @@
 <script setup lang="ts">
 import type { ButtonList } from "#build/components";
 import type { ISector } from "@/interface/ISector";
-import type { IStock } from "@/interface/IStock";
 const { sectors, selectSector, getSectors } = useSector();
 const { stocks, selectStock, getStocks } = useStock();
-const { financialsFilter } = useFinancial();
+const { financials, getFinancials } = useFinancial();
 
 onMounted(() => {
   getSectors().then((res: any) => {
@@ -24,8 +23,10 @@ onMounted(() => {
 const onClick = (sector: ISector) => {
   selectSector.value = sector;
   selectStock.value = undefined;
+  getFinancials().then((res: any) => {
+    financials.value = res;
+  });
   if (sector == undefined) return;
-  financialsFilter();
   getStocks(sector.sectorCode).then((res: any) => {
     stocks.value = res;
   });

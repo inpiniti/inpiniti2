@@ -7,7 +7,7 @@
         'bg-neutral-700': marketType === 'KOSPI',
         'text-neutral-300': marketType === 'KOSPI',
       }"
-      @click="marketType = 'KOSPI'"
+      @click="onClick('KOSPI')"
     >
       <p>KOSPI</p>
     </button>
@@ -17,14 +17,23 @@
         'bg-neutral-700': marketType === 'KOSDAQ',
         'text-neutral-300': marketType === 'KOSDAQ',
       }"
-      @click="marketType = 'KOSDAQ'"
+      @click="onClick('KOSDAQ')"
     >
       <p>KOSDAQ</p>
     </button>
   </div>
 </template>
 <script setup lang="ts">
-const marketType = useState<"KOSPI" | "KOSDAQ">("marketType");
+const { financials, getFinancials } = useFinancial();
+
+const marketType = useState<"KOSPI" | "KOSDAQ" | undefined>("marketType");
+
+const onClick = (market_type: "KOSPI" | "KOSDAQ" | undefined) => {
+  marketType.value = market_type;
+  getFinancials().then((res: any) => {
+    financials.value = res;
+  });
+};
 </script>
 <style scoped lang="scss">
 .section {

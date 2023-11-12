@@ -5,7 +5,7 @@
     <select
       class="h-7 hover:bg-neutral-600 hover:text-neutral-200 bg-neutral-700 text-neutral-300 outline-none px-3 py-1"
       v-model="year"
-      @change="yyyy_mm = `${year}.${month.padStart(2, '0')}`"
+      @change="submit"
     >
       <option
         v-for="year in Array.from(
@@ -21,7 +21,7 @@
     <select
       class="h-7 hover:bg-neutral-600 hover:text-neutral-200 bg-neutral-700 text-neutral-300 outline-none px-3 py-1"
       v-model="month"
-      @change="yyyy_mm = `${year}.${month.padStart(2, '0')}`"
+      @change="submit"
     >
       <option
         v-for="year in Array.from({ length: 12 }, (_, i) => i + 1)"
@@ -34,6 +34,7 @@
       type="text"
       class="h-7 outline-none hover:bg-neutral-600 hover:text-neutral-200 bg-neutral-700 text-neutral-300 px-3 py-1"
       v-model="search_word"
+      @keyup.enter="submit"
     />
     <button
       class="h-7 hover:bg-neutral-600 hover:text-neutral-200 bg-neutral-700 text-neutral-300 outline-none px-3 py-1"
@@ -41,14 +42,10 @@
     >
       조회
     </button>
-    <div class="px-3">
-      {{ filterFinancials.length }} / {{ financials.length }}
-    </div>
   </div>
 </template>
 <script setup lang="ts">
-const { financials, filterFinancials, getFinancials, financialsFilter } =
-  useFinancial();
+const { financials, getFinancials } = useFinancial();
 
 const year = ref<string>("2023");
 const month = ref<string>("1");
@@ -57,13 +54,9 @@ const search_word = useState<string>("search_word", () => "");
 
 const submit = () => {
   useSearch().yyyy_mm.value = `${year.value}.${month.value.padStart(2, "0")}`;
-  getFinancials()
-    .then((res: any) => {
-      financials.value = res;
-    })
-    .finally(() => {
-      financialsFilter();
-    });
+  getFinancials().then((res: any) => {
+    financials.value = res;
+  });
 };
 </script>
 <style scoped lang="scss">

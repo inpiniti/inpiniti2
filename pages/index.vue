@@ -23,7 +23,7 @@
       <tbody>
         <TR
           :financial="financial"
-          v-for="(financial, index) in filterFinancials"
+          v-for="(financial, index) in financials"
           class="hover:bg-neutral-600 hover:text-neutral-200"
           :class="{ 'bg-neutral-900': index % 2 !== 0 }"
         />
@@ -75,5 +75,5 @@ const financial_filed = ref<string[]>([
   "섹터 이름",
   "다음 월말 종가",
 ]);
-const { filterFinancials, financialsLoading } = useFinancial();
+const { financials, financialsLoading } = useFinancial();
 </script>
