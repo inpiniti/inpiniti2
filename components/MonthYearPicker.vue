@@ -33,15 +33,13 @@
   </div>
 </template>
 <script setup lang="ts">
-const { financials, getFinancials } = useFinancial();
+const { getFinancials } = useFinancial();
 
 const year = ref<string>("2023");
 const month = ref<string>("1");
 
 const submit = () => {
   useSearch().yyyy_mm.value = `${year.value}.${month.value.padStart(2, "0")}`;
-  getFinancials().then((res: any) => {
-    financials.value = res;
-  });
+  getFinancials();
 };
 </script>

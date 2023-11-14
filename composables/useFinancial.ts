@@ -14,10 +14,9 @@ export const useFinancial = () => {
             financial.mktNm ==
               useState<"KOSPI" | "KOSDAQ">("marketType").value) &&
           (useSector().selectSector.value?.sectorCode == undefined ||
-            financial.sectorCode ==
-              useSector().selectSector.value?.sectorCode) &&
-          (useStock().selectStock.value?.symbolCode == undefined ||
-            financial.symbolCode == useStock().selectStock.value?.symbolCode)
+            financial.sectorCode == useSector().selectSector.value?.sectorCode) // &&
+          //(useStock().selectStock.value?.symbolCode == undefined ||
+          //  financial.symbolCode == useStock().selectStock.value?.symbolCode)
         );
       }
     );
@@ -33,13 +32,14 @@ export const useFinancial = () => {
           mktNm: useState<"KOSPI" | "KOSDAQ">("marketType").value,
           name: useSearch().search_word.value,
           sectorCode: useSector().selectSector.value?.sectorCode,
-          symbolCode: useStock().selectStock.value?.symbolCode,
+          //symbolCode: useStock().selectStock.value?.symbolCode,
           page,
         },
       })
       .then((res: any) => {
         financials.value = res.data_list;
-        totalPage.value = res.total_count / 100 + 1;
+        totalPage.value = Math.floor(res.total_count / 100) + 1;
+        console.log("totalPage", totalPage.value);
       })
       .finally(() => {
         financialsLoading.value = false;

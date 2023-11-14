@@ -11,8 +11,8 @@
 import type { ButtonList } from "#build/components";
 import type { ISector } from "@/interface/ISector";
 const { sectors, selectSector, getSectors } = useSector();
-const { stocks, selectStock, getStocks } = useStock();
-const { financials, getFinancials } = useFinancial();
+//const { stocks, selectStock, getStocks } = useStock();
+const { getFinancials } = useFinancial();
 
 onMounted(() => {
   getSectors().then((res: any) => {
@@ -22,13 +22,11 @@ onMounted(() => {
 
 const onClick = (sector: ISector) => {
   selectSector.value = sector;
-  selectStock.value = undefined;
-  getFinancials().then((res: any) => {
-    financials.value = res;
-  });
+  //selectStock.value = undefined;
+  getFinancials();
   if (sector == undefined) return;
-  getStocks(sector.sectorCode).then((res: any) => {
-    stocks.value = res;
-  });
+  //getStocks(sector.sectorCode).then((res: any) => {
+  //  stocks.value = res;
+  //});
 };
 </script>

@@ -16,13 +16,11 @@
   </div>
 </template>
 <script setup lang="ts">
-const { financials, getFinancials } = useFinancial();
+const { getFinancials } = useFinancial();
 
 const search_word = useState<string>("search_word", () => "");
 
 const submit = () => {
-  getFinancials().then((res: any) => {
-    financials.value = res;
-  });
+  getFinancials();
 };
 </script>

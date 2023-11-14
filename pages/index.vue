@@ -12,12 +12,11 @@
       </div>
       <table class="min-w-full">
         <thead class="sticky top-0">
-          <tr
-            class="hover:bg-neutral-600 hover:text-neutral-200 bg-neutral-900"
-          >
+          <tr class="bg-neutral-900">
             <th
-              class="px-3 py-1 whitespace-nowrap"
+              class="hover:bg-neutral-600 hover:text-neutral-200 px-3 py-1 whitespace-nowrap cursor-pointer"
               v-for="field in extractedFinancials_filedlist"
+              @click="onClickFiled(field)"
             >
               {{ field }}
             </th>
@@ -34,39 +33,103 @@
         </tbody>
       </table>
     </div>
-    <Page class="h-7" />
+    <Page class="h-7" v-if="useFinancial().totalPage.value > 1" />
   </div>
 </template>
 <script setup lang="ts">
+const { financials, financialsLoading } = useFinancial();
+const sortField = ref<string>("");
+const sortFieldIsAscending = ref<any>({
+  year: false,
+  sales: false,
+  operatingprofit: false,
+  netincome: false,
+  operatingprofitratio: false,
+  netprofitratio: false,
+  prevsales: false,
+  prevoperatingprofit: false,
+  prevnetincome: false,
+  prevoperatingprofitratio: false,
+  prevnetprofitratio: false,
+  saleschange: false,
+  operatingprofitchange: false,
+  netincomechange: false,
+  operatingprofitratiochange: false,
+  netprofitratiochange: false,
+  trdDd: false,
+  isuAbbrv: false,
+  isuSrtCd: false,
+  mktNm: false,
+  mmendClsprc: false,
+  hgstClsprc: false,
+  lwstClsprc: false,
+  isuStd: false,
+  isuKurt: false,
+  coskew: false,
+  isuBeta: false,
+  isuAmibud: false,
+  isuZeros: false,
+  mmAccTrdvol: false,
+  avgAccTrdvol: false,
+  mmAccTrdval: false,
+  avgAccTrdval: false,
+  mmendclsprcchange: false,
+  code: false,
+  symbolCode: false,
+  name: false,
+  sectorCode: false,
+  sectorName: false,
+  nextmmendclsprc: false,
+});
+
 const extractedFinancials = computed(() => {
-  return financials.value.map((financial) => {
-    const {
-      mktNm,
-      sectorName,
-      name,
-      year,
-      prevnetprofitratio,
-      saleschange,
-      operatingprofitchange,
-      netincomechange,
-      operatingprofitratiochange,
-      netprofitratiochange,
-      mmendclsprcchange,
-    } = financial;
-    return {
-      mktNm,
-      sectorName,
-      name,
-      year,
-      prevnetprofitratio,
-      saleschange,
-      operatingprofitchange,
-      netincomechange,
-      operatingprofitratiochange,
-      netprofitratiochange,
-      mmendclsprcchange,
-    };
-  });
+  // sortField가 없으면 financials.value를 그대로 반환
+  return financials.value
+    .map((financial) => {
+      const {
+        mktNm,
+        sectorName,
+        name,
+        year,
+        prevnetprofitratio,
+        saleschange,
+        operatingprofitchange,
+        netincomechange,
+        operatingprofitratiochange,
+        netprofitratiochange,
+        mmendclsprcchange,
+      } = financial;
+      return {
+        mktNm,
+        sectorName,
+        name,
+        year,
+        prevnetprofitratio,
+        saleschange,
+        operatingprofitchange,
+        netincomechange,
+        operatingprofitratiochange,
+        netprofitratiochange,
+        mmendclsprcchange,
+      };
+    })
+    .sort((a: any, b: any) => {
+      if (sortField.value == "") {
+        return 0;
+      }
+      if (
+        typeof a[sortField.value] === "number" &&
+        typeof b[sortField.value] === "number"
+      ) {
+        return sortFieldIsAscending.value[sortField.value]
+          ? a[sortField.value] - b[sortField.value]
+          : b[sortField.value] - a[sortField.value];
+      } else {
+        return sortFieldIsAscending.value[sortField.value]
+          ? a[sortField.value].localeCompare(b[sortField.value])
+          : b[sortField.value].localeCompare(a[sortField.value]);
+      }
+    });
 });
 
 const extractedFinancials_filedlist = computed(() => {
@@ -122,5 +185,18 @@ const fieldNames: { [key: string]: string } = {
   sectorName: "섹터 이름",
   nextmmendclsprc: "다음 월말 종가",
 };
-const { financials, financialsLoading } = useFinancial();
+
+const onClickFiled = (field: string) => {
+  sortField.value = reversedFieldNames[field];
+  sortFieldIsAscending.value[sortField.value] =
+    !sortFieldIsAscending.value[sortField.value];
+};
+
+const reversedFieldNames = Object.entries(fieldNames).reduce(
+  (obj: any, [key, value]) => {
+    obj[value] = key;
+    return obj;
+  },
+  {}
+);
 </script>
