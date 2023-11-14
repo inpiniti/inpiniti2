@@ -23,7 +23,13 @@
       <tbody>
         <TR
           :financial="financial"
-          v-for="(financial, index) in financials"
+          v-for="(financial, index) in financials.map((financial) => {
+            return {
+              mktNm: financial.mktNm,
+              sectorName: financial.sectorName,
+              name: financial.name,
+            };
+          })"
           class="hover:bg-neutral-600 hover:text-neutral-200"
           :class="{ 'bg-neutral-900': index % 2 !== 0 }"
         />

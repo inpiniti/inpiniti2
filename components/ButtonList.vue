@@ -26,7 +26,7 @@
       v-for="(item, index) in list"
     >
       <p>
-        {{ item[buttonLabel] }}
+        {{ buttonLabel ? item[buttonLabel] : item }}
       </p>
     </button>
   </div>
@@ -36,7 +36,7 @@ const emit = defineEmits(["click"]);
 
 const props = defineProps<{
   title: string;
-  buttonLabel: string;
+  buttonLabel?: string;
   list: Array<any>;
   selected: any;
 }>();

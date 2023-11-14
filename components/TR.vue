@@ -12,6 +12,6 @@
 <script setup lang="ts">
 import type { IFinancial } from "@/interface/IFinancial";
 const props = defineProps<{
-  financial: IFinancial;
+  financial: any;
 }>();
 </script>
