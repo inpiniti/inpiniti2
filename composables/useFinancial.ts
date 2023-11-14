@@ -4,6 +4,7 @@ export const useFinancial = () => {
   const filterFinancials = useState<IFinancial[]>("filterFinancials", () => []);
   const financials = useState<IFinancial[]>("financials", () => []);
   const financialsLoading = useState<boolean>("financialsLoading", () => false);
+  const totalPage = useState<number>("totalPage", () => 0);
 
   const financialsFilter = () => {
     filterFinancials.value = financials.value.filter(
@@ -22,7 +23,7 @@ export const useFinancial = () => {
     );
   };
 
-  const getFinancials = async () => {
+  const getFinancials = async (page: number = 1) => {
     financialsLoading.value = true;
     return useApi()
       .post({
@@ -33,7 +34,12 @@ export const useFinancial = () => {
           name: useSearch().search_word.value,
           sectorCode: useSector().selectSector.value?.sectorCode,
           symbolCode: useStock().selectStock.value?.symbolCode,
+          page,
         },
+      })
+      .then((res: any) => {
+        financials.value = res.data_list;
+        totalPage.value = res.total_count / 100 + 1;
       })
       .finally(() => {
         financialsLoading.value = false;
@@ -43,6 +49,7 @@ export const useFinancial = () => {
     financials,
     filterFinancials,
     financialsLoading,
+    totalPage,
     getFinancials,
     financialsFilter,
   };

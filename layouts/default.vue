@@ -4,7 +4,6 @@
   >
     <MarketType />
     <Sector />
-    <Stock />
     <Column class="flex-grow">
       <MonthYearPicker />
       <Search />
