@@ -3,7 +3,7 @@
     <div class="px-1">MonthYearPicker</div>
     <p class="px-2">년도</p>
     <select
-      class="h-7 hover:bg-neutral-600 hover:text-neutral-200 bg-neutral-700 text-neutral-300 outline-none px-3 py-1"
+      class="h-7 hover:bg-neutral-600 hover:text-neutral-200 bg-neutral-700 text-neutral-300 outline-none px-3 py-1 rounded-none"
       v-model="year"
       @change="submit"
     >
@@ -19,7 +19,7 @@
     </select>
     <p class="px-2">월</p>
     <select
-      class="h-7 hover:bg-neutral-600 hover:text-neutral-200 bg-neutral-700 text-neutral-300 outline-none px-3 py-1"
+      class="h-7 hover:bg-neutral-600 hover:text-neutral-200 bg-neutral-700 text-neutral-300 outline-none px-3 py-1 rounded-none"
       v-model="month"
       @change="submit"
     >
@@ -36,7 +36,11 @@
 const { getFinancials } = useFinancial();
 
 const year = ref<string>("2023");
-const month = ref<string>("1");
+const month = ref<string>("3");
+
+onMounted(() => {
+  submit();
+});
 
 const submit = () => {
   useSearch().yyyy_mm.value = `${year.value}.${month.value.padStart(2, "0")}`;

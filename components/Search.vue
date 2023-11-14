@@ -3,7 +3,7 @@
     <div class="px-1">Search</div>
     <input
       type="text"
-      class="h-7 outline-none hover:bg-neutral-600 hover:text-neutral-200 bg-neutral-700 text-neutral-300 px-3 py-1"
+      class="h-7 outline-none hover:bg-neutral-600 hover:text-neutral-200 bg-neutral-700 text-neutral-300 px-3 py-1 rounded-none"
       v-model="search_word"
       @keyup.enter="submit"
     />
