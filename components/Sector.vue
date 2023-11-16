@@ -5,7 +5,9 @@
     :list="sectors"
     :selected="selectSector"
     @click="onClick"
-  />
+  >
+    <font-awesome-icon :icon="['fas', 'cubes-stacked']" />
+  </ButtonList>
 </template>
 <script setup lang="ts">
 import type { ButtonList } from "#build/components";

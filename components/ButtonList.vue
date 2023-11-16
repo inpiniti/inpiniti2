@@ -8,8 +8,9 @@
   >
     <div
       v-if="title != undefined"
-      class="px-3 py-1 sticky top-0 left-0 bg-neutral-900 z-10"
+      class="px-3 py-1 sticky top-0 left-0 bg-neutral-900 z-10 whitespace-nowrap"
     >
+      <slot />
       {{ title }}
     </div>
     <button

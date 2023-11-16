@@ -4,7 +4,9 @@
     :list="['KOSPI', 'KOSDAQ']"
     :selected="marketType"
     @click="onClick"
-  />
+  >
+    <font-awesome-icon :icon="['fas', 'store']" />
+  </ButtonList>
 </template>
 <script setup lang="ts">
 const { getFinancials } = useFinancial();

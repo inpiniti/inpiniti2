@@ -1,11 +1,10 @@
 <template>
-  <div class="flex flex-col h-full">
+  <div class="flex flex-col h-full relative">
     <div
-      class="flex-grow overflow-auto relative scrollbar-hide scrollbar scrollbar-w scrollbar-h"
+      class="flex-grow overflow-auto scrollbar-hide scrollbar scrollbar-w scrollbar-h"
     >
       <div
-        class="absolute top-0, bottom-0, left-0, right-0 flex items-center justify-center h-full w-full text-stone-400"
-        :class="{ 'backdrop-blur': financialsLoading }"
+        class="absolute flex items-center justify-center h-full w-full text-stone-400 backdrop-blur"
         v-if="financialsLoading"
       >
         <div class="loading">loading...</div>
