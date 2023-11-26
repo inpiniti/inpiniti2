@@ -6,8 +6,6 @@
   <PolitePopup />
 </template>
 <script setup lang="ts">
-const layout = "default";
-
 import { onMounted, onUnmounted } from "vue";
 
 onMounted(() => {

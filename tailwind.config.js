@@ -18,6 +18,9 @@ module.exports = {
           "scrollbar-width": "none" /* 파이어폭스 */,
           "-ms-overflow-style": "none" /* 인터넷 익스플로러 */,
         },
+        ".scrollbar-hide::-webkit-scrollbar": {
+          display: "none" /* 크롬, 사파리 등 */,
+        },
         ".scrollbar::-webkit-scrollbar-thumb": {
           backgroundColor: "rgb(14, 165, 233)",
         },

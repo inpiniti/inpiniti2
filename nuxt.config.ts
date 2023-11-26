@@ -16,6 +16,10 @@ export default defineNuxtConfig({
       path: "~/components",
       extensions: [".vue"],
     },
+    {
+      path: "~/components/*",
+      extensions: [".vue"],
+    },
   ],
   runtimeConfig: {
     public: {
