@@ -23,7 +23,8 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      api: "http://110.46.192.54:5000",
+      //api: "http://110.46.192.54:5000",
+      api: "http://localhost:5001",
       REGIST_TOKEN: "",
       LOG_SPEED: "",
       map: {

@@ -28,7 +28,9 @@
         </div>
         <div class="bg-blue-400 p-4 gap-40 flex flex-col rounded-xl">
           <div>
-            <div class="text-xs text-white">인피니티</div>
+            <div class="text-xs text-white">
+              인피니티 파이넨셜 어날리시스 (inpiniti financial analysis)
+            </div>
             <div class="text-xl text-white font-bold">
               인공지능으로 분석하기
             </div>
@@ -44,8 +46,12 @@
               분석하기
             </button>
             <button
-              class="bg-white hover:bg-blue-400 hover:text-white text-blue-400 rounded-md py-2 px-4 flex gap-4 shadow-xl items-center"
-              :disabled="ailoading"
+              class="rounded-md py-2 px-4 flex gap-4 shadow-xl items-center"
+              :class="
+                ailoading
+                  ? 'bg-gray-400 text-white'
+                  : 'bg-white text-blue-400 hover:bg-blue-400 hover:text-white'
+              "
               @click="trainModel"
             >
               <font-awesome-icon
@@ -53,9 +59,9 @@
                 spin
                 v-if="ailoading"
               />
-              <font-awesome-icon :icon="['fas', 'play']" v-else />
+              <font-awesome-icon :icon="['fas', 'play']" v-if="!ailoading" />
               <div v-if="ailoading">학습중...</div>
-              <div v-else>학습시키기</div>
+              <div v-if="!ailoading">학습시키기</div>
             </button>
           </div>
         </div>
@@ -86,7 +92,7 @@
           <div class="font-bold">분석 기간</div>
           <div class="flex gap-4">
             <Button text="3달" :selected="기간 == '3'" @click="기간 = '3'" />
-            <Button text="1년" :selected="기간 == '1'" @click="기간 = '1'" />
+            <Button text="1년" :selected="기간 == '12'" @click="기간 = '12'" />
             <Button
               text="2015 ~"
               :selected="기간 == 'all'"
@@ -117,11 +123,15 @@
             />
           </div>
           <div class="flex gap-4">
-            <Button text="ElasticNet" :selected="알고리즘 == 'ElasticNet'" />
             <Button
-              text="Desicion Tree"
-              :selected="알고리즘 == 'Desicion Tree'"
-              @click="알고리즘 = 'Desicion Tree'"
+              text="ElasticNet"
+              :selected="알고리즘 == 'ElasticNet'"
+              @click="알고리즘 = 'ElasticNet'"
+            />
+            <Button
+              text="Decision Tree"
+              :selected="알고리즘 == 'Decision Tree'"
+              @click="알고리즘 = 'Decision Tree'"
             />
             <Button
               text="Random Forest"
@@ -234,7 +244,7 @@ definePageMeta({
 });
 
 const trainModel = async () => {
-  learning(알고리즘, 시장, 기간);
+  learning(알고리즘.value, 시장.value, 기간.value);
 };
 </script>
 <style scoped>
