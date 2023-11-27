@@ -2,7 +2,7 @@
   <div class="h-screen py-4 flex flex-col gap-4 w-7xl mx-auto">
     <div class="flex w-full gap-4 shrink-0 px-4">
       <div class="flex flex-col gap-4 overflow-hidden relative w-7/12">
-        <img class="absolute bg-img-1 w-80" src="아냐1.webp" />
+        <img class="absolute bg-img-1 w-80" src="/anya1.webp" />
         <div class="flex flex-row gap-4 items-center">
           <div
             class="bg-gray-100 rounded-md text-xs p-2 gap-4 flex items-center h-full grow-[1]"
@@ -40,10 +40,20 @@
           </div>
           <div class="flex gap-4">
             <button
-              class="bg-white hover:bg-blue-400 hover:text-white text-blue-400 rounded-md py-2 px-4 flex gap-4 shadow-xl items-center"
+              class="rounded-md py-2 px-4 flex gap-4 shadow-xl items-center"
+              :class="
+                predictloading
+                  ? 'bg-gray-400 text-white'
+                  : 'bg-white text-blue-400 hover:bg-blue-400 hover:text-white'
+              "
+              @click="predictModel"
+              :disabled="predictloading"
             >
-              <font-awesome-icon :icon="['fas', 'play']" />
-              분석하기
+              <font-awesome-icon
+                :icon="['fas', predictloading ? 'spinner' : 'play']"
+                :spin="predictloading"
+              />
+              {{ predictloading ? "분석중..." : "분석하기" }}
             </button>
             <button
               class="rounded-md py-2 px-4 flex gap-4 shadow-xl items-center"
@@ -53,15 +63,13 @@
                   : 'bg-white text-blue-400 hover:bg-blue-400 hover:text-white'
               "
               @click="trainModel"
+              :disabled="ailoading"
             >
               <font-awesome-icon
-                :icon="['fas', 'spinner']"
-                spin
-                v-if="ailoading"
+                :icon="['fas', ailoading ? 'spinner' : 'play']"
+                :spin="ailoading"
               />
-              <font-awesome-icon :icon="['fas', 'play']" v-if="!ailoading" />
-              <div v-if="ailoading">학습중...</div>
-              <div v-if="!ailoading">학습시키기</div>
+              {{ ailoading ? "학습중..." : "학습시키기" }}
             </button>
           </div>
         </div>
@@ -140,34 +148,36 @@
             />
           </div>
         </div>
-        <img class="absolute bg-img-2 w-72" src="아냐2.webp" />
+        <img class="absolute bg-img-2 w-72" src="/anya2.webp" />
       </div>
     </div>
     <div class="relative flex overflow-hidden grow-[1]">
-      <img class="bg-img-3 absolute w-96" src="아냐3.png" />
+      <img class="bg-img-3 absolute w-96" src="/anya3.png" />
       <div class="flex w-full gap-52">
         <div class="whitespace-nowrap text-xs px-4">종목 리스트</div>
         <div
           class="w-full flex flex-col gap-4 overflow-y-scroll scrollbar-hide px-4"
         >
-          <div
-            class="w-full bg-blue-400 text-white hover:bg-white hover:text-blue-400 p-4 rounded-xl flex gap-4 shadow-xl cursor-pointer"
-            @click="modalopen = true"
-            v-for="item in 40"
-          >
-            <div class="whitespace-nowrap">삼성전자</div>
-            <div class="whitespace-nowrap">005930</div>
-            <div class="whitespace-nowrap">코스피</div>
-            <div class="whitespace-nowrap">2021-09-01</div>
+          <template v-if="!!predictlist">
             <div
-              class="w-full bg-white relative border-2 border-white flex justify-end"
+              class="w-full bg-blue-400 text-white hover:bg-white hover:text-blue-400 p-4 rounded-xl flex gap-4 shadow-xl cursor-pointer"
+              @click="modalopen = true"
+              v-for="l in predictlist"
             >
-              <div class="text-blue-400">10.4%</div>
-              <div class="w-1/2 bg-blue-400 absolute left-0 top-0 text-white">
-                1.3%
+              <div class="whitespace-nowrap">{{ l.isu_abbrv }}</div>
+              <div class="whitespace-nowrap">{{ l.isu_srt_cd }}</div>
+              <div class="whitespace-nowrap">{{ l.mkt_nm }}</div>
+              <div class="whitespace-nowrap">{{ l.year }}.{{ l.month }}</div>
+              <div
+                class="w-full bg-white relative border-2 border-white flex justify-end"
+              >
+                <div class="text-blue-400">10.4%</div>
+                <div class="w-1/2 bg-blue-400 absolute left-0 top-0 text-white">
+                  {{ l.next_mmend_clsprc_change }}%
+                </div>
               </div>
             </div>
-          </div>
+          </template>
         </div>
       </div>
     </div>
@@ -234,17 +244,27 @@
   </div>
 </template>
 <script setup lang="ts">
+import type { IPredict } from "~/interface/IPredict";
+
 const 시장 = ref("all");
 const 기간 = ref("3");
 const 알고리즘 = ref("Deep Learning");
 const modalopen = ref(false);
-const { ailoading, learning } = useAi();
+
+const { learning, predict, ailoading, predictloading, predictlist } = useAi();
+
 definePageMeta({
   layout: "none",
 });
 
 const trainModel = async () => {
   learning(알고리즘.value, 시장.value, 기간.value);
+};
+
+const predictModel = async () => {
+  predict(알고리즘.value, 시장.value, 기간.value).then((res) => {
+    alert("분석이 완료되었습니다.");
+  });
 };
 </script>
 <style scoped>
