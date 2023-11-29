@@ -34,7 +34,6 @@
             <div class="text-xl text-white font-bold">
               인공지능으로 분석하기
             </div>
-            <div>Collection</div>
             <div class="text-xl text-white font-bold">
               시장, 기간, 알고리즘을 선택하여 분석을 시작하세요.
             </div>
