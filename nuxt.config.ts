@@ -11,6 +11,7 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  plugins: [{ src: "~/plugins/apexcharts.client.js", mode: "client" }],
   components: [
     {
       path: "~/components",
@@ -23,8 +24,8 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      api: "http://110.46.192.54:5000",
-      //api: "http://localhost:5001",
+      //api: "http://110.46.192.54:5000",
+      api: "http://localhost:5001",
       REGIST_TOKEN: "",
       LOG_SPEED: "",
       map: {
