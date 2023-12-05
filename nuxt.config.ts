@@ -21,6 +21,14 @@ export default defineNuxtConfig({
       path: "~/components/*",
       extensions: [".vue"],
     },
+    {
+      path: "~/components/desktop",
+      extensions: [".vue"],
+    },
+    {
+      path: "~/components/mobile",
+      extensions: [".vue"],
+    },
   ],
   runtimeConfig: {
     public: {
