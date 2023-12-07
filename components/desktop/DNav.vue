@@ -30,6 +30,7 @@
 const nav = ref("");
 const link = (newNav: string) => {
   nav.value = newNav;
+  console.log(nav.value);
   useRouter().push(`/${newNav}`);
 };
 </script>

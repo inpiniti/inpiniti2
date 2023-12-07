@@ -22,3 +22,6 @@ logs
 .env
 .env.*
 !.env.example
+
+.storybook/auto-imports.d.ts
+.storybook/components.d.ts

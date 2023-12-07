@@ -1,54 +1,36 @@
 <template>
-  <div class="py-4 flex flex-col gap-4 grow-[1] h-screen pl-4">
+  <div class="flex flex-col grow-[1] gap-4 lg:px-0 p-4 pt-0">
     <div class="flex w-full gap-4 shrink-0">
-      <div class="flex flex-col gap-4 overflow-hidden relative w-full">
-        <img class="absolute bg-img-1 w-80 z-10" src="/anya1.webp" />
-        <div class="flex flex-row gap-4 items-center">
-          <div
-            class="bg-white rounded-md text-xs p-2 gap-4 flex items-center h-full grow-[1]"
-          >
-            <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
-            <input
-              class="outline-none bg-transparent w-full"
-              type="text"
-              placeholder="종목을 입력해주세요."
-            />
+      <div
+        class="bg-blue-400 p-4 w-full relative overflow-hidden lg:h-72 flex flex-col rounded-3xl justify-between lg:gap-0 gap-4"
+      >
+        <img
+          class="lg:hidden block absolute bg-img-1m lg:w-80 w-44 z-10"
+          src="/anya1.webp"
+        />
+        <img
+          class="hidden lg:block absolute bg-img-1 lg:w-80 w-44 z-10"
+          src="/anya2.webp"
+        />
+        <div>
+          <div class="text-xs text-white">
+            인피니티 파이넨셜 어날리시스 (inpiniti financial analysis)
           </div>
-          <div class="flex flex-row gap-4 items-center h-fit shrink-0">
-            <div>
-              <div class="text-xs">aaa@gmail.com</div>
-              <div>홍길동님</div>
-            </div>
-            <div
-              class="w-8 h-8 bg-blue-400 rounded-full overflow-hidden text-white flex justify-center text-3xl pt-2"
-            >
-              <font-awesome-icon :icon="['fas', 'user']" />
-            </div>
+          <div class="text-xl text-white font-bold">
+            수집 시작 버튼을 눌러 데이터를 수집해주세요.
           </div>
         </div>
-        <div
-          class="bg-blue-400 p-4 h-72 flex flex-col rounded-3xl relative justify-between"
-        >
-          <div>
-            <div class="text-xs text-white">
-              인피니티 파이넨셜 어날리시스 (inpiniti financial analysis)
-            </div>
-            <div class="text-xl text-white font-bold">
-              수집 시작 버튼을 눌러 데이터를 수집해주세요.
-            </div>
-          </div>
-          <div class="flex gap-2 flex-col">
-            <button
-              class="px-4 py-2 w-fit bg-white rounded-xl shadow-xl text-blue-400"
-              @click="startCollection"
-            >
-              수집 시작
-            </button>
-          </div>
+        <div class="flex gap-2 flex-col">
+          <button
+            class="px-4 py-2 w-fit bg-white rounded-xl shadow-xl text-blue-400"
+            @click="startCollection"
+          >
+            수집 시작
+          </button>
         </div>
       </div>
     </div>
-    <div class="flex flex-col gap-1">
+    <div class="flex flex-col gap-1 shrink-0">
       <div>수집 프로그래스</div>
       <div class="flex gap-4">
         <div class="w-full bg-white p-4 rounded-3xl flex flex-col gap-2">
@@ -108,11 +90,11 @@
       </div>
     </div>
     <div class="relative flex overflow-hidden grow-[1]">
-      <img class="bg-img-3 absolute w-96" src="/anya3.png" />
-      <div class="flex w-full gap-52">
-        <div class="whitespace-nowrap text-xs px-4">수집된 데이터 리스트</div>
+      <img class="bg-img-3 absolute lg:w-96 w-56" src="/anya3.png" />
+      <div class="flex flex-col w-full gap-1">
+        <div class="whitespace-nowrap shrink-0">수집된 데이터 리스트</div>
         <div
-          class="w-full flex flex-col gap-4 overflow-y-scroll scrollbar-hide px-4 bg-white rounded-xl"
+          class="w-full grow-[1] flex flex-col gap-4 overflow-y-scroll scrollbar-hide px-4 bg-white rounded-xl"
         >
           <template v-if="!!dartlist">
             <div
@@ -208,6 +190,10 @@ definePageMeta({
 .w-7xl {
   width: 80rem;
 }
+.bg-img-1m {
+  top: -69px;
+  right: 0;
+}
 .bg-img-1 {
   top: -100px;
   right: 0;
@@ -217,7 +203,7 @@ definePageMeta({
   left: -80px;
 }
 .bg-img-3 {
-  top: 30px;
-  left: 0;
+  bottom: -30px;
+  left: -60px;
 }
 </style>

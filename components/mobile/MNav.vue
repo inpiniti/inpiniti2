@@ -1,13 +1,13 @@
 <template>
   <div
-    class="lg:hidden flex absolute top-0 left-0 flex-col h-full w-1/2 p-4 shrink-0 bg-white z-10 rounded-r-xl shadow-2xl gap-2"
-    :class="open ? 'flex' : 'hidden'"
+    class="absolute top-0 left-0 flex-col h-full w-1/2 p-4 shrink-0 bg-white z-10 rounded-r-xl shadow-2xl gap-2"
+    :class="navOpen ? 'flex' : 'hidden'"
   >
     <div class="pb-2 font-bold text-xl flex items-center justify-between">
       <div><font-awesome-icon :icon="['fas', 'apple-whole']" /> IFA</div>
       <div
-        class="px-2 bg-blue-100 rounded-lg w-fit text-blue-50 hover:text-blue-300 cursor-pointer"
-        @click="open = false"
+        class="px-2 rounded-lg w-fit cursor-pointer"
+        @click="navOpen = false"
       >
         <font-awesome-icon :icon="['fas', 'xmark']" />
       </div>
@@ -49,9 +49,10 @@
 </template>
 <script setup lang="ts">
 const nav = ref("");
-const open = ref(false);
+const navOpen = useState("navOpen", () => false);
 const link = (newNav: string) => {
   nav.value = newNav;
   useRouter().push(`/${newNav}`);
+  navOpen.value = false;
 };
 </script>
