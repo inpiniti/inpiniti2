@@ -18,5 +18,6 @@
   </div>
 </template>
 <script setup lang="ts">
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 const navOpen = useState("navOpen", () => false);
 </script>

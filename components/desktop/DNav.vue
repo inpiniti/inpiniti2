@@ -27,6 +27,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
 const nav = ref("");
 const link = (newNav: string) => {
   nav.value = newNav;

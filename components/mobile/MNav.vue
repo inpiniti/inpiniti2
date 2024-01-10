@@ -7,7 +7,7 @@
       <div><font-awesome-icon :icon="['fas', 'apple-whole']" /> IFA</div>
       <div
         class="px-2 rounded-lg w-fit cursor-pointer"
-        @click="navOpen = false"
+        @click="$emit('update:navOpen', false)"
       >
         <font-awesome-icon :icon="['fas', 'xmark']" />
       </div>
@@ -48,11 +48,15 @@
   </div>
 </template>
 <script setup lang="ts">
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 const nav = ref("");
-const navOpen = useState("navOpen", () => false);
+//const navOpen = useState("navOpen", () => false);
 const link = (newNav: string) => {
   nav.value = newNav;
   useRouter().push(`/${newNav}`);
-  navOpen.value = false;
+  //navOpen.value = false;
 };
+const props = defineProps<{
+  navOpen?: boolean;
+}>();
 </script>

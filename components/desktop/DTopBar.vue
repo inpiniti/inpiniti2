@@ -1,8 +1,8 @@
 <template>
   <div class="lg:flex hidden shrink-0">
-    <div class="flex flex-row gap-4 items-center">
+    <div class="flex flex-row gap-4 items-center w-full">
       <div
-        class="bg-white rounded-md text-xs p-2 gap-4 flex items-center h-full grow-[1]"
+        class="bg-gray-100 rounded-md text-xs p-2 gap-4 flex items-center h-full grow-[1]"
       >
         <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
         <input
@@ -25,3 +25,6 @@
     </div>
   </div>
 </template>
+<script setup lang="ts">
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+</script>
