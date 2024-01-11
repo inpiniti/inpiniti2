@@ -26,6 +26,12 @@ definePageMeta({
   layout: "empty",
 });
 
+async function signInWithKakao() {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "kakao",
+  });
+}
+
 import { Bar, getDatasetAtEvent } from "vue-chartjs";
 import {
   Chart as ChartJS,
